@@ -34,7 +34,7 @@ public class ProfessorController extends JFrame {
         while (true) {
             nome = JOptionPane.showInputDialog("Digite o nome do professor:");
             if (nome == null || nome.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nome não pode estar vazio. Por favor, tente novamente.", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Você deve informar o nome do professor.", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
             } else {
                 break;
             }
@@ -51,7 +51,7 @@ public class ProfessorController extends JFrame {
                 if (idade > 0 && idade < 130) {
                     break;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Insira uma idade válida para o professor:", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Insira uma idade válida para o professor.", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
                 }
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Insira um número válido para a idade.", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
@@ -61,7 +61,7 @@ public class ProfessorController extends JFrame {
         while (true) {
             especialidade = JOptionPane.showInputDialog("Digite a especialidade do professor:");
             if (especialidade == null || especialidade.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Especialidade não pode estar vazia. Por favor, tente novamente.", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Você deve informar uma especialidade para o professor.", "Cadastro de Professores", JOptionPane.ERROR_MESSAGE);
             } else {
                 break;
             }

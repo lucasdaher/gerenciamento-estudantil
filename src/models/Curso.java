@@ -10,6 +10,22 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
     }
 
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
+    }
+
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }

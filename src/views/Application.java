@@ -1,5 +1,6 @@
 package views;
 
+import controllers.CursoController;
 import controllers.EstudanteController;
 import controllers.ProfessorController;
 import models.Curso;
@@ -18,6 +19,7 @@ public class Application extends JFrame {
 
     EstudanteController estudanteController = new EstudanteController();
     ProfessorController professorController = new ProfessorController();
+    CursoController cursoController = new CursoController();
 
     public Application() {
         setTitle("Gerenciamento Estudantil");
@@ -34,9 +36,8 @@ public class Application extends JFrame {
         JButton btnSair = new JButton("Sair do programa");
 
         btnAluno.addActionListener(e -> estudanteController.menuAluno());
-        // adicionar restante dos actionlistener
         btnProfessor.addActionListener(e -> professorController.menuProfessor());
-
+        btnCurso.addActionListener(e -> cursoController.menuCurso());
         btnSair.addActionListener(e -> System.exit(0));
 
         panel.add(btnAluno);
