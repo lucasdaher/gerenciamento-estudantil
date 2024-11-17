@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Estudante;
-import models.Professor;
 import views.Application;
 
 import javax.swing.*;
