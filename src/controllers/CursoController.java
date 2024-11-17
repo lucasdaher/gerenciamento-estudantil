@@ -1,6 +1,8 @@
 package controllers;
 
 import models.Curso;
+import models.Estudante;
+import models.Professor;
 import views.Application;
 
 import javax.swing.*;
@@ -14,20 +16,24 @@ public class CursoController extends JFrame{
         cursoFrame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4,1));
+        panel.setLayout(new GridLayout(5,1));
 
         JButton btnCadastrar = new JButton("Cadastrar Curso");
         JButton btnConsultar = new JButton("Consultar Curso");
-        JButton btnVincular = new JButton("Vincular Alunos ou Professores");
+        JButton btnVincularEstudante = new JButton("Matricular Estudante");
+        JButton btnVincularProfessor = new JButton("Vincular Professor");
         JButton btnVoltar = new JButton("Voltar ao menu principal");
 
         btnCadastrar.addActionListener(e -> cadastrarCurso());
         btnConsultar.addActionListener(e -> consultarCurso());
+        btnVincularEstudante.addActionListener(e -> matricularEstudante());
+        btnVincularProfessor.addActionListener(e -> vincularProfessor());
         btnVoltar.addActionListener(e -> cursoFrame.dispose());
 
         panel.add(btnCadastrar);
         panel.add(btnConsultar);
-        panel.add(btnVincular);
+        panel.add(btnVincularEstudante);
+        panel.add(btnVincularProfessor);
         panel.add(btnVoltar);
 
         cursoFrame.add(panel);
@@ -115,5 +121,78 @@ public class CursoController extends JFrame{
         } else {
             JOptionPane.showMessageDialog(null, "O curso informado não foi encontrado.", "Consultar Curso", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void matricularEstudante() {
+        if (Application.cursos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum curso cadastrado.", "Vinculação de Estudantes", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (Application.estudantes.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum estudante cadastrado.", "Vinculação de Estudantes", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String cursoNome = JOptionPane.showInputDialog("Digite o nome do curso para vincular estudantes:");
+        Curso cursoSelecionado = Application.cursos.stream()
+                .filter(curso -> curso.getNomeCurso().equalsIgnoreCase(cursoNome))
+                .findFirst()
+                .orElse(null);
+
+        if (cursoSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Curso não encontrado.", "Vinculação de Estudantes", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String matriculaEstudante = JOptionPane.showInputDialog("Digite a matrícula do estudante:");
+        Estudante estudanteSelecionado = Application.estudantes.stream()
+                .filter(estudante -> estudante.getMatricula().equalsIgnoreCase(matriculaEstudante))
+                .findFirst()
+                .orElse(null);
+
+        if (estudanteSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Estudante não encontrado.", "Vinculação de Estudantes", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(null, "Estudante " + estudanteSelecionado.getNome() + " matriculado no curso " + cursoSelecionado.getNomeCurso() + ".", "Vinculação de Estudantes", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void vincularProfessor() {
+        if (Application.cursos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum curso cadastrado.", "Associação de Professores", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (Application.professores.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum professor cadastrado.", "Associação de Professores", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String cursoNome = JOptionPane.showInputDialog("Digite o nome do curso para associar um professor:");
+        Curso cursoSelecionado = Application.cursos.stream()
+                .filter(curso -> curso.getNomeCurso().equalsIgnoreCase(cursoNome))
+                .findFirst()
+                .orElse(null);
+
+        if (cursoSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Curso não encontrado.", "Associação de Professores", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nomeProfessor = JOptionPane.showInputDialog("Digite o nome do professor:");
+        Professor professorSelecionado = Application.professores.stream()
+                .filter(professor -> professor.getNome().equalsIgnoreCase(nomeProfessor))
+                .findFirst()
+                .orElse(null);
+
+        if (professorSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Professor não encontrado.", "Associação de Professores", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        cursoSelecionado.setProfessor(professorSelecionado);
+        JOptionPane.showMessageDialog(null, "Professor " + professorSelecionado.getNome() + " associado ao curso " + cursoSelecionado.getNomeCurso() + ".", "Associação de Professores", JOptionPane.INFORMATION_MESSAGE);
     }
 }

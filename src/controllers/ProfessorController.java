@@ -14,13 +14,19 @@ public class ProfessorController extends JFrame {
         professorFrame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4,1));
+        panel.setLayout(new GridLayout(3,1));
 
         JButton btnCadastrar = new JButton("Cadastrar Professor");
+        JButton btnConsultar = new JButton("Consultar Professor");
+        JButton btnVoltar = new JButton("Voltar ao menu principal");
 
         btnCadastrar.addActionListener(e-> cadastrarProfessor());
+        btnConsultar.addActionListener(e-> consultarProfessor());
+        btnVoltar.addActionListener(e -> professorFrame.dispose());
 
         panel.add(btnCadastrar);
+        panel.add(btnConsultar);
+        panel.add(btnVoltar);
 
         professorFrame.add(panel);
         professorFrame.setVisible(true);
@@ -87,6 +93,44 @@ public class ProfessorController extends JFrame {
                 , "O professor foi cadastrado com sucesso."
                 , "Cadastro realizado"
                 , JOptionPane.PLAIN_MESSAGE);
+    }
+
+    private void consultarProfessor() {
+        String nomeProfessor = JOptionPane.showInputDialog("Digite o nome do professor:");
+        Professor professorEncontrado = null;
+
+        for (Professor professor : Application.professores) {
+            if (professor.getNome().equals(nomeProfessor)) {
+                professorEncontrado = professor;
+                break;
+            }
+        }
+
+        if (professorEncontrado != null) {
+            int opcao = JOptionPane.showOptionDialog(
+                    null,
+                    "Professor encontrado: " + professorEncontrado.getNome() + "\nIdade: " + professorEncontrado.getIdade() + "\nEspecialidade: " + professorEncontrado.getEspecialidade(),
+                    "Consultar Professor",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    new String[]{"Editar", "Excluir", "Cancelar"},
+                    "Cancelar"
+            );
+
+            if (opcao == 0) {
+                String novoNome = JOptionPane.showInputDialog("Digite o novo nome do professor:");
+                int novaIdade = Integer.parseInt(JOptionPane.showInputDialog("Digite a nova idade do professor:"));
+                professorEncontrado.setNome(novoNome);
+                professorEncontrado.setIdade(novaIdade);
+                JOptionPane.showMessageDialog(null, "As informações deste professor foram editadas com sucesso.", "Editar Professor", JOptionPane.PLAIN_MESSAGE);
+            } else if (opcao == 1) {
+                Application.professores.remove(professorEncontrado);
+                JOptionPane.showMessageDialog(null, "Professor excluído com sucesso!", "Excluir Professor", JOptionPane.PLAIN_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Professor não encontrado.", "Consultar Professor", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }

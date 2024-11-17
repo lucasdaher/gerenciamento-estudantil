@@ -3,6 +3,7 @@ package views;
 import controllers.CursoController;
 import controllers.EstudanteController;
 import controllers.ProfessorController;
+import controllers.RelatorioController;
 import models.Curso;
 import models.Estudante;
 import models.Professor;
@@ -20,6 +21,7 @@ public class Application extends JFrame {
     EstudanteController estudanteController = new EstudanteController();
     ProfessorController professorController = new ProfessorController();
     CursoController cursoController = new CursoController();
+    RelatorioController relatorioController = new RelatorioController();
 
     public Application() {
         setTitle("Gerenciamento Estudantil");
@@ -39,7 +41,7 @@ public class Application extends JFrame {
         btnAluno.addActionListener(e -> estudanteController.menuAluno());
         btnProfessor.addActionListener(e -> professorController.menuProfessor());
         btnCurso.addActionListener(e -> cursoController.menuCurso());
-        btnRelatorio.addActionListener(e -> cursoController.menuCurso());
+        btnRelatorio.addActionListener(e -> relatorioController.menuRelatorio());
         btnSair.addActionListener(e -> System.exit(0));
 
         panel.add(btnAluno);

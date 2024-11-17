@@ -15,7 +15,7 @@ public class EstudanteController extends JFrame {
         alunoFrame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4,1));
+        panel.setLayout(new GridLayout(3,1));
 
         JButton btnCadastrar = new JButton("Cadastrar Novo Aluno");
         JButton btnConsultar = new JButton("Consultar Aluno");

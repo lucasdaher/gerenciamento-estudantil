@@ -38,5 +38,10 @@ public class Curso {
         System.out.println("Informações sobre o Curso:");
         System.out.println("- Nome do Curso: " + nomeCurso);
         System.out.println("- Carga Horária: " + cargaHoraria);
+        if (professor != null) {
+            System.out.println("- Professor Responsável: " + professor.getNome());
+        } else {
+            System.out.println("- Nenhum professor está responsável deste curso.");
+        }
     }
 }
