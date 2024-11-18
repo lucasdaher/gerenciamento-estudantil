@@ -51,7 +51,7 @@ public class RelatorioController extends JFrame {
                         .append("\nCursos: ");
 
                 List<String> cursosEstudante = Application.cursos.stream()
-                        .filter(curso -> curso.getNomeCurso() != null)
+                        .filter(curso -> curso.getEstudantesMatriculados().contains(estudante))
                         .map(Curso::getNomeCurso)
                         .toList();
 
@@ -86,7 +86,7 @@ public class RelatorioController extends JFrame {
                         .toList();
 
                 if (cursosProfessor.isEmpty()) {
-                    relatorio.append("Nenhum.");
+                    relatorio.append("Nenhum");
                 } else {
                     relatorio.append(String.join(", ", cursosProfessor));
                 }
@@ -124,10 +124,7 @@ public class RelatorioController extends JFrame {
             relatorio.append("Professor Responsável: Nenhum professor associado\n");
         }
 
-        List<Estudante> estudantesMatriculados = Application.estudantes.stream()
-                .filter(estudante -> Application.cursos.stream()
-                        .anyMatch(curso -> curso.getNomeCurso().equalsIgnoreCase(cursoNome)))
-                .toList();
+        List<Estudante> estudantesMatriculados = cursoSelecionado.getEstudantesMatriculados();
 
         if (estudantesMatriculados.isEmpty()) {
             relatorio.append("Estudantes Matriculados: Nenhum estudante matriculado\n");

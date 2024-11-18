@@ -156,6 +156,12 @@ public class CursoController extends JFrame{
             return;
         }
 
+        if (cursoSelecionado.getEstudantesMatriculados().contains(estudanteSelecionado)) {
+            JOptionPane.showMessageDialog(null, "O estudante já está matriculado neste curso.", "Vinculação de Estudantes", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        cursoSelecionado.adicionarEstudante(estudanteSelecionado);
         JOptionPane.showMessageDialog(null, "Estudante " + estudanteSelecionado.getNome() + " matriculado no curso " + cursoSelecionado.getNomeCurso() + ".", "Vinculação de Estudantes", JOptionPane.INFORMATION_MESSAGE);
     }
 

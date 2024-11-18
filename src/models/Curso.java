@@ -1,13 +1,18 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
     private String nomeCurso;
     private int cargaHoraria;
     private Professor professor;
+    private List<Estudante> estudantesMatriculados;
 
     public Curso(String nomeCurso, int cargaHoraria) {
         this.nomeCurso = nomeCurso;
         this.cargaHoraria = cargaHoraria;
+        this.estudantesMatriculados = new ArrayList<Estudante>();
     }
 
     public void setNomeCurso(String nomeCurso) {
@@ -32,6 +37,14 @@ public class Curso {
 
     public String getNomeCurso() {
         return nomeCurso;
+    }
+
+    public List<Estudante> getEstudantesMatriculados() {
+        return estudantesMatriculados;
+    }
+
+    public void adicionarEstudante(Estudante estudante) {
+        estudantesMatriculados.add(estudante);
     }
 
     public void exibirDados() {
