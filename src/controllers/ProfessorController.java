@@ -33,17 +33,31 @@ public class ProfessorController extends JFrame {
     }
 
     private void cadastrarProfessor() {
-        String nome;
         int idade;
         String especialidade;
+        String nome;
 
-        while (true) {
+        while(true) {
             nome = JOptionPane.showInputDialog("Digite o nome do professor:");
+
+            for (Professor professor : Application.professores) {
+                if (professor.getNome().equals(nome)) {
+                    JOptionPane.showMessageDialog(null
+                            , "Um professor com este nome já está cadastrado."
+                            , "Cadastro de Professores"
+                            , JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                } else {
+                    break;
+                }
+            }
+
             if (nome == null || nome.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null
                         , "Você deve informar o nome do professor."
                         , "Cadastro de Professores"
                         , JOptionPane.ERROR_MESSAGE);
+
             } else {
                 break;
             }
@@ -78,11 +92,15 @@ public class ProfessorController extends JFrame {
 
         while (true) {
             especialidade = JOptionPane.showInputDialog("Digite a especialidade do professor:");
-            if (especialidade == null || especialidade.trim().isEmpty()) {
+            if (especialidade == null) {
+                JOptionPane.showMessageDialog(null, "", "", JOptionPane.ERROR_MESSAGE);
+            }
+            if (especialidade.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null
                         , "Você deve informar uma especialidade para o professor."
                         , "Cadastro de Professores"
                         , JOptionPane.ERROR_MESSAGE);
+
             } else {
                 break;
             }
@@ -127,9 +145,11 @@ public class ProfessorController extends JFrame {
             } else if (opcao == 1) {
                 Application.professores.remove(professorEncontrado);
                 JOptionPane.showMessageDialog(null, "Professor excluído com sucesso!", "Excluir Professor", JOptionPane.PLAIN_MESSAGE);
+            } else if (opcao == 2) {
+                JOptionPane.showMessageDialog(null, "Você saiu da consulta de professor.", "Operação Cancelada", JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Professor não encontrado.", "Consultar Professor", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "A consulta não encontrou um professor com este nome.", "Consultar Professor", JOptionPane.ERROR_MESSAGE);
         }
     }
 
