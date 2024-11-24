@@ -69,7 +69,7 @@ public class ProfessorController extends JFrame {
                 if (idadeInput == null) {
                     JOptionPane.showMessageDialog(null
                             , "O cadastro foi cancelado ao tentar enviar um campo vazio."
-                            , "Cadastro de Professores"
+                            , "Cadastro de Professor"
                             , JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -79,13 +79,13 @@ public class ProfessorController extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null
                             , "Insira uma idade válida para o professor."
-                            , "Cadastro de Professores"
+                            , "Cadastro de Professor"
                             , JOptionPane.ERROR_MESSAGE);
                 }
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(null
                         , "Insira um número válido para a idade."
-                        , "Cadastro de Professores"
+                        , "Cadastro de Professor"
                         , JOptionPane.ERROR_MESSAGE);
             }
         }
